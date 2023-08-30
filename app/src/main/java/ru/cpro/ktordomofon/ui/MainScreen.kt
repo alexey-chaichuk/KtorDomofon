@@ -25,7 +25,7 @@ import ru.cpro.ktordomofon.ui.viewmodel.MainViewModelFactory
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
-fun mainScreen(
+fun MainScreen(
     vm: MainViewModel = viewModel( factory = MainViewModelFactory(IntercomRepository.create()))
 ) {
     val uiState = vm.uiState.collectAsState()
@@ -36,14 +36,10 @@ fun mainScreen(
     Column(modifier = Modifier.fillMaxWidth(),
         horizontalAlignment = Alignment.CenterHorizontally) {
 
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .height(16.dp))
+        Spacer(modifier = Modifier.height(16.dp))
         Text(text = "Мой дом",
             style = MaterialTheme.typography.titleLarge)
-        Spacer(modifier = Modifier
-            .fillMaxWidth()
-            .height(20.dp))
+        Spacer(modifier = Modifier.height(20.dp))
 
         TabRow(selectedTabIndex = tabIndex) {
             tabs.forEachIndexed { index, title ->
@@ -55,7 +51,7 @@ fun mainScreen(
             }
         }
         when(tabIndex) {
-            0 -> CamerasScreen(uiState)
+            0 -> CamerasScreen(vm, uiState)
             1 -> DoorsScreen(uiState)
         }
     }
