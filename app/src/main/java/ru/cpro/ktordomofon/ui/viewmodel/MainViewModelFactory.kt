@@ -2,7 +2,7 @@ package ru.cpro.ktordomofon.ui.viewmodel
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import ru.cpro.ktordomofon.data.repository.IntercomRepository
+import ru.cpro.ktordomofon.domain.repository.IntercomRepository
 import java.lang.IllegalArgumentException
 
 @Suppress("UNCHECKED_CAST")
