@@ -11,7 +11,6 @@ import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.offset
 import androidx.compose.foundation.layout.padding
 import androidx.compose.foundation.layout.size
-import androidx.compose.foundation.layout.wrapContentSize
 import androidx.compose.foundation.lazy.LazyColumn
 import androidx.compose.foundation.lazy.items
 import androidx.compose.material.Card
@@ -58,8 +57,8 @@ fun DoorsScreen(uiState: State<MainViewUiState>,
             val scope = rememberCoroutineScope()
             val swipeState = rememberSwipeableState(SwipeState.Off)
             val sizePx = with(LocalDensity.current) { 120.dp.toPx() }
-            Box(modifier = Modifier.
-                wrapContentSize()) {
+
+            Box {
                 Row(modifier = Modifier
                     .align(Alignment.CenterEnd)
                     .padding(16.dp)
@@ -70,7 +69,9 @@ fun DoorsScreen(uiState: State<MainViewUiState>,
                             scope.launch {
                                 swipeState.animateTo(SwipeState.Off, tween(600, 0))
                             }
-                        }
+                        },
+                        enabled = true,
+
                     ) {
                         Icon(
                             painter = painterResource(id = R.drawable.edit),
