@@ -1,8 +1,6 @@
-package ru.cpro.ktordomofon.data.repository
+package ru.cpro.ktordomofon.domain.repository
 
 import kotlinx.coroutines.flow.Flow
-import ru.cpro.ktordomofon.data.source.local.DbCache
-import ru.cpro.ktordomofon.data.source.remote.RubetekService
 import ru.cpro.ktordomofon.domain.model.Camera
 import ru.cpro.ktordomofon.domain.model.Door
 
@@ -22,11 +20,4 @@ interface IntercomRepository {
     suspend fun updateDoorsInDbFromRemoteDs()
 
     suspend fun getCamerasFromDbAsFlow() : Flow<List<Camera>>
-
-    companion object {
-        fun create() = IntercomRepositoryImpl(
-            RubetekService.create(),
-            DbCache.create()
-        )
-    }
 }
