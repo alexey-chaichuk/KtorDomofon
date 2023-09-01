@@ -83,6 +83,7 @@ class IntercomRepositoryImpl(
 
     override suspend fun updateCamerasInDbFromRemoteDs() {
         service.getCameras().mapCatching { camerasDto ->
+            db.clearCameras()
             db.saveCameras(
                 camerasDto.data.cameras.map { cameraDto ->
                     mapper.mapCameraDtoToEntity(cameraDto)
@@ -93,6 +94,7 @@ class IntercomRepositoryImpl(
 
     override suspend fun updateDoorsInDbFromRemoteDs() {
         service.getDoors().mapCatching { doorsDto ->
+            db.clearDoors()
             db.saveDoors(
                 doorsDto.doors.map { doorDto ->
                     mapper.mapDoorDtoToEntity(doorDto)
@@ -105,4 +107,7 @@ class IntercomRepositoryImpl(
         TODO()
     }
 
+    override suspend fun saveNameForDoorById(id: Int, name: String) {
+        db.saveNameForDoorById(id, name)
+    }
 }

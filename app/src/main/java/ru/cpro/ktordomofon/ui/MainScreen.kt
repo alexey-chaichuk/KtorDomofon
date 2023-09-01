@@ -27,7 +27,12 @@ import ru.cpro.ktordomofon.ui.viewmodel.MainViewModelFactory
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
-    vm: MainViewModel = viewModel( factory = MainViewModelFactory(App.Companion.appModule.intercomRepository))
+    vm: MainViewModel = viewModel( factory = MainViewModelFactory(
+        getCamerasInRoomsUseCase = App.appModule.getCamerasInRoomsUseCase,
+        getDoorsFromDbUseCase = App.appModule.getDoorsFromDbUseCase,
+        updateDbFromNetUseCase = App.appModule.updateDbFromNetUseCase,
+        saveNameForDoorByIdUseCase = App.appModule.saveNameForDoorByIdUseCase
+    ))
 ) {
     val uiState = vm.uiState.collectAsState()
 
@@ -55,7 +60,7 @@ fun MainScreen(
         }
         when(tabIndex) {
             0 -> CamerasScreen(vm, uiState)
-            1 -> DoorsScreen(uiState)
+            1 -> DoorsScreen(vm, uiState)
         }
     }
 }

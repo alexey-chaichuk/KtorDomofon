@@ -55,8 +55,7 @@ private enum class SwipeStateCamera {
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
-fun CamerasScreen(
-    vm: MainViewModel,
+fun CamerasScreen(vm: MainViewModel,
     uiState: State<MainViewUiState>,
     modifier: Modifier = Modifier
 ) {

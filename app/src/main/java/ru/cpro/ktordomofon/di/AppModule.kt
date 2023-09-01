@@ -18,6 +18,10 @@ import ru.cpro.ktordomofon.data.source.local.entity.DoorEntity
 import ru.cpro.ktordomofon.data.source.remote.RubetekService
 import ru.cpro.ktordomofon.data.source.remote.RubetekServiceImpl
 import ru.cpro.ktordomofon.domain.repository.IntercomRepository
+import ru.cpro.ktordomofon.domain.usecase.GetCamerasInRoomsUseCase
+import ru.cpro.ktordomofon.domain.usecase.GetDoorsFromDbUseCase
+import ru.cpro.ktordomofon.domain.usecase.SaveNameForDoorByIdUseCase
+import ru.cpro.ktordomofon.domain.usecase.UpdateDbFromNetUseCase
 
 interface AppModule {
     val httpClient: HttpClient
@@ -25,6 +29,10 @@ interface AppModule {
     val realmDb: Realm
     val dbCache: DbCache
     val intercomRepository: IntercomRepository
+    val getCamerasInRoomsUseCase: GetCamerasInRoomsUseCase
+    val getDoorsFromDbUseCase: GetDoorsFromDbUseCase
+    val updateDbFromNetUseCase: UpdateDbFromNetUseCase
+    val saveNameForDoorByIdUseCase: SaveNameForDoorByIdUseCase
 
     class Base(
         private val appContext: Context
@@ -72,6 +80,22 @@ interface AppModule {
                 service = rubetekService,
                 db = dbCache
             )
+        }
+
+        override val getCamerasInRoomsUseCase: GetCamerasInRoomsUseCase by lazy {
+            GetCamerasInRoomsUseCase(intercomRepository)
+        }
+
+        override val getDoorsFromDbUseCase: GetDoorsFromDbUseCase by lazy {
+            GetDoorsFromDbUseCase(intercomRepository)
+        }
+
+        override val updateDbFromNetUseCase: UpdateDbFromNetUseCase by lazy {
+            UpdateDbFromNetUseCase(intercomRepository)
+        }
+
+        override val saveNameForDoorByIdUseCase: SaveNameForDoorByIdUseCase by lazy {
+            SaveNameForDoorByIdUseCase(intercomRepository)
         }
     }
 }

@@ -20,4 +20,6 @@ interface IntercomRepository {
     suspend fun updateDoorsInDbFromRemoteDs()
 
     suspend fun getCamerasFromDbAsFlow() : Flow<List<Camera>>
+
+    suspend fun saveNameForDoorById(id: Int, name: String)
 }
