@@ -105,10 +105,4 @@ class IntercomRepositoryImpl(
         TODO()
     }
 
-    companion object {
-        fun create() = IntercomRepositoryImpl(
-            RubetekService.create(),
-            DbCache.create()
-        )
-    }
 }
