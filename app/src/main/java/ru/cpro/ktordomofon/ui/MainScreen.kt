@@ -20,14 +20,19 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.unit.dp
 import androidx.lifecycle.viewmodel.compose.viewModel
-import ru.cpro.ktordomofon.data.repository.IntercomRepositoryImpl
+import ru.cpro.ktordomofon.App
 import ru.cpro.ktordomofon.ui.viewmodel.MainViewModel
 import ru.cpro.ktordomofon.ui.viewmodel.MainViewModelFactory
 
 @OptIn(ExperimentalMaterialApi::class)
 @Composable
 fun MainScreen(
-    vm: MainViewModel = viewModel( factory = MainViewModelFactory(IntercomRepositoryImpl.create()))
+    vm: MainViewModel = viewModel( factory = MainViewModelFactory(
+        getCamerasInRoomsUseCase = App.appModule.getCamerasInRoomsUseCase,
+        getDoorsFromDbUseCase = App.appModule.getDoorsFromDbUseCase,
+        updateDbFromNetUseCase = App.appModule.updateDbFromNetUseCase,
+        saveNameForDoorByIdUseCase = App.appModule.saveNameForDoorByIdUseCase
+    ))
 ) {
     val uiState = vm.uiState.collectAsState()
 
@@ -55,7 +60,7 @@ fun MainScreen(
         }
         when(tabIndex) {
             0 -> CamerasScreen(vm, uiState)
-            1 -> DoorsScreen(uiState)
+            1 -> DoorsScreen(vm, uiState)
         }
     }
 }
