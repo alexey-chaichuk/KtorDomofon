@@ -78,12 +78,12 @@ dependencies {
     implementation "io.ktor:ktor-client-logging:$ktor_version"
     implementation "io.ktor:ktor-client-content-negotiation:$ktor_version"
     implementation "io.ktor:ktor-serialization-kotlinx-json:$ktor_version"
-
+    testImplementation "io.ktor:ktor-client-mock:$ktor_version"
+    testImplementation 'org.jetbrains.kotlinx:kotlinx-coroutines-test:1.7.3'
     implementation "org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0"
     implementation "io.coil-kt:coil-compose:2.4.0"
 
     coreLibraryDesugaring "com.android.tools:desugar_jdk_libs:2.0.3"
 
     implementation 'io.realm.kotlin:library-base:1.10.0'
-    //implementation 'org.jetbrains.kotlinx:kotlinx-coroutines-core:1.7.3' // If using coroutines with the SDK
 }
